@@ -3,6 +3,7 @@
 **/.history/*
 **/.terraform.lock.hcl/*
 **.terraform.*.*
+.terraform.lock.hcl
 
 # .tfstate files
 *.tfstate
