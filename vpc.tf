@@ -6,6 +6,14 @@ resource "aws_vpc" "mera-vpc" {
     Name = "terraform vpc"
   }
 }
+/*
+Requirements:
+1.Subnets(3)
+2.Internet gateway
+3.Routing Table
+4.Associating  Routing table with IG for 3 subnets for Internet access.
+*/
+
 #Public Subnet 1
 resource "aws_subnet" "pub1" {
   vpc_id     = aws_vpc.mera-vpc.id
