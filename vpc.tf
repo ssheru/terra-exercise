@@ -16,8 +16,8 @@ Requirements:
 
 #Public Subnet 1
 resource "aws_subnet" "pub1" {
-  vpc_id     = aws_vpc.mera-vpc.id
-  cidr_block = "10.0.1.0/24"
+  vpc_id            = aws_vpc.mera-vpc.id
+  cidr_block        = "10.0.1.0/24"
   availability_zone = "us-west-2a"
 
   tags = {
@@ -26,8 +26,8 @@ resource "aws_subnet" "pub1" {
 }
 #Public Subnet 2
 resource "aws_subnet" "pub2" {
-  vpc_id     = aws_vpc.mera-vpc.id
-  cidr_block = "10.0.2.0/24"
+  vpc_id            = aws_vpc.mera-vpc.id
+  cidr_block        = "10.0.2.0/24"
   availability_zone = "us-west-2b"
 
   tags = {
@@ -36,8 +36,8 @@ resource "aws_subnet" "pub2" {
 }
 #Public Subnet 3
 resource "aws_subnet" "pub3" {
-  vpc_id     = aws_vpc.mera-vpc.id
-  cidr_block = "10.0.3.0/24"
+  vpc_id            = aws_vpc.mera-vpc.id
+  cidr_block        = "10.0.3.0/24"
   availability_zone = "us-west-2c"
 
   tags = {
@@ -90,8 +90,8 @@ Requirements:
 */
 #Private  Subnet 1
 resource "aws_subnet" "private1" {
-  vpc_id     = aws_vpc.mera-vpc.id
-  cidr_block = "10.0.4.0/24"
+  vpc_id            = aws_vpc.mera-vpc.id
+  cidr_block        = "10.0.4.0/24"
   availability_zone = "us-west-2a"
 
   tags = {
@@ -100,8 +100,8 @@ resource "aws_subnet" "private1" {
 }
 #Private  Subnet 2
 resource "aws_subnet" "private2" {
-  vpc_id     = aws_vpc.mera-vpc.id
-  cidr_block = "10.0.5.0/24"
+  vpc_id            = aws_vpc.mera-vpc.id
+  cidr_block        = "10.0.5.0/24"
   availability_zone = "us-west-2b"
 
   tags = {
@@ -110,8 +110,8 @@ resource "aws_subnet" "private2" {
 }
 #Private  Subnet 3
 resource "aws_subnet" "private3" {
-  vpc_id     = aws_vpc.mera-vpc.id
-  cidr_block = "10.0.6.0/24"
+  vpc_id            = aws_vpc.mera-vpc.id
+  cidr_block        = "10.0.6.0/24"
   availability_zone = "us-west-2c"
 
   tags = {
@@ -120,7 +120,7 @@ resource "aws_subnet" "private3" {
 }
 # EIP Address for NAT-Gateway
 resource "aws_eip" "NAT-EIP" {
-vpc = true 
+  vpc = true
 }
 
 #NAT Gateway:
@@ -131,28 +131,28 @@ resource "aws_nat_gateway" "NAT-GW" {
 #Route Table for NATGAteway:
 
 resource "aws_route_table" "NATED-RT" {
-    vpc_id = aws_vpc.mera-vpc.id
+  vpc_id = aws_vpc.mera-vpc.id
 
-    route {
-        cidr_block = "0.0.0.0/0"
-        nat_gateway_id = aws_nat_gateway.NAT-GW.id
-    }
+  route {
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.NAT-GW.id
+  }
 
-    tags = {
-        Name = "Main Route Table for NAT-ed subnet"
-    }
+  tags = {
+    Name = "Main Route Table for NAT-ed subnet"
+  }
 }
 
 #Nated RT Associated
 resource "aws_route_table_association" "NATED-RT-S1" {
-    subnet_id = aws_subnet.private1.id
-    route_table_id = aws_route_table.NATED-RT.id
-  }
+  subnet_id      = aws_subnet.private1.id
+  route_table_id = aws_route_table.NATED-RT.id
+}
 resource "aws_route_table_association" "NATED-RT-S2" {
-    subnet_id = aws_subnet.private2.id
-    route_table_id = aws_route_table.NATED-RT.id
-  }
-  resource "aws_route_table_association" "NATED-RT-S3" {
-    subnet_id = aws_subnet.private3.id
-    route_table_id = aws_route_table.NATED-RT.id
-  }
+  subnet_id      = aws_subnet.private2.id
+  route_table_id = aws_route_table.NATED-RT.id
+}
+resource "aws_route_table_association" "NATED-RT-S3" {
+  subnet_id      = aws_subnet.private3.id
+  route_table_id = aws_route_table.NATED-RT.id
+}
