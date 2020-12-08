@@ -18,7 +18,7 @@ Requirements:
 resource "aws_subnet" "pub1" {
   vpc_id     = aws_vpc.mera-vpc.id
   cidr_block = "10.0.1.0/24"
-  availability_zone_id = "us-west-2a"
+  availability_zone = "us-west-2a"
 
   tags = {
     Name = "pub-subnet-1"
@@ -28,7 +28,7 @@ resource "aws_subnet" "pub1" {
 resource "aws_subnet" "pub2" {
   vpc_id     = aws_vpc.mera-vpc.id
   cidr_block = "10.0.2.0/24"
-  availability_zone_id = "us-west-2b"
+  availability_zone = "us-west-2b"
 
   tags = {
     Name = "pub-subnet-2"
@@ -38,7 +38,7 @@ resource "aws_subnet" "pub2" {
 resource "aws_subnet" "pub3" {
   vpc_id     = aws_vpc.mera-vpc.id
   cidr_block = "10.0.3.0/24"
-  availability_zone_id = "us-west-2c"
+  availability_zone = "us-west-2c"
 
   tags = {
     Name = "pub-subnet-3"
@@ -80,3 +80,4 @@ resource "aws_route_table_association" "RT-IG-S3" {
   route_table_id = aws_route_table.PB-RT.id
 }
 
+#Task 2: Create 3 private subnets and
